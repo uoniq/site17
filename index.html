@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>	</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+	<div class="game">
+		<h1 class="text-center">POINTS</h1>
+		<h1 class="points text-center">0</h1>
+		<div class="container">
+			<div class="row">
+				<div class="col-3 border" style="height: 300px; background: #fbbb11">
+					<img class="jakethedog w-75 jake" src="jake.png" alt="" style="display: none">
+					<img class="iceking w-75 ice" src="Ice_King.png" alt="" style="display: none">
+					<img src="bimo.png" class = "bimo w-75" style="display: none">
+				</div>
+				<div class="col-3 border" style="height: 300px; background: #fbbb11">
+					<img class="jakethedog jake" src="jake.png"  alt="" style="display: none">
+					<img class="iceking w-75 ice" src="Ice_King.png" alt="" style="display: none">
+					<img src="bimo.png" class = "bimo w-75" style="display: none">
+				</div>
+				<div class="col-3 border" style="height: 300px; background: #fbbb11">
+					<img class="jakethedog jake" src="jake.png"  alt="" style="display: none">
+					<img class="iceking w-75 ice" src="Ice_King.png" alt="" style="display: none">
+					<img src="bimo.png" class = "bimo w-75" style="display: none">
+				</div>
+				<div class="col-3 border" style="height: 300px; background: #fbbb11">
+					<img class="jakethedog jake" src="jake.png"  alt="" style="display: none">
+					<img class="iceking w-75 ice" src="Ice_King.png" alt="" style="display: none">
+					<img src="bimo.png" class = "bimo w-75" style="display: none">
+				</div>
+			</div>
+			<div class="col-12 bg-danger status text-center mx-auto">
+					
+			</div>
+			<div class="row">
+				<div class="col-3 border" style="height: 300px; background: #fbbb11">
+					<img class="jakethedog jake" src="jake.png" alt="" style="display: none">
+					<img class="iceking w-75 ice" src="Ice_King.png" alt="" style="display: none">
+					<img src="bimo.png" class = "bimo w-75" style="display: none">
+				</div>
+				<div class="col-3 border" style="height: 300px; background: #fbbb11">
+					<img class="jakethedog jake" src="jake.png"  alt="" style="display: none">
+					<img class="iceking w-75 ice" src="Ice_King.png" alt="" style="display: none">
+					<img src="bimo.png" class = "bimo w-75" style="display: none">
+				</div>
+				<div class="col-3 border" style="height: 300px; background: #fbbb11">
+					<img class="jakethedog jake" src="jake.png"  alt="" style="display: none">
+					<img class="iceking w-75 ice" src="Ice_King.png" alt="" style="display: none">
+					<img src="bimo.png" class = "bimo w-75" style="display: none">
+				</div>
+				<div class="col-3 border" style="height: 300px; background: #fbbb11">
+					<img class="jakethedog jake" src="jake.png"  alt="" style="display: none">
+					<img class="iceking w-75 ice" src="Ice_King.png" alt="" style="display: none">
+					<img src="bimo.png" class = "bimo w-75" style="display: none">
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		let jake = document.querySelectorAll(".jake")
+		let ice = document.querySelectorAll(".ice")
+		let score = document.querySelector(".points")
+		let bimo = document.querySelectorAll(".bimo")
+		let points = 0
+		let status = document.querySelector(".status")
+		let time = 10000
+		let rand = function(){
+			let random = Math.random()*7
+			let round = Math.round(random)
+			return round
+		}
+		let show = function(arg){
+			let random = rand()
+			arg[random].style.display = "block"
+			let chislo = 1
+			if(arg == ice){
+				chislo = -10
+			}
+			else if(arg == jake){
+				chislo = 1
+			}
+			else{
+				chislo = 0
+				time = time + 30000
+			}
+			arg[random].onclick = function(){
+				points = points + chislo
+				score.innerHTML = points
+				arg[random].style.display = "none"
+			}
+			let hide = function(){
+				arg[random].style.display = "none"
+			}
+			setTimeout(hide, 500)
+		}
+		let jakeshow = function(){
+			show(jake)
+		}
+		let iceshow = function(){
+			show(ice)
+		}
+		let bimoshow = function(){
+			show(bimo)
+		}
+		let jakes = setInterval(jakeshow,1000)
+		let ices = setInterval(iceshow,2000)
+		let bimos = setInterval(bimoshow,4500)
+		let gameover = function(){
+			if (points >= 5) {
+				status.innerHTML = "u win"
+				clearInterval(jakes)
+				clearInterval(ices)
+				clearInterval(bimos)
+			}
+			else{
+				status.innerHTML = "u lose"				
+				clearInterval(jakes)
+				clearInterval(ices)
+				clearInterval(bimos)
+			}
+		}
+		setTimeout(gameover, time)
+	</script>
+</body>
+</html>
